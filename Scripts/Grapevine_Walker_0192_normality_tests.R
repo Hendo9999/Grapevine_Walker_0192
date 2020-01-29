@@ -25,6 +25,7 @@ boxplot(laminae_sample_weight)
 
 
 
+
 #Four normality tests
 
 shapiro.test(laminae_sample_weight)
