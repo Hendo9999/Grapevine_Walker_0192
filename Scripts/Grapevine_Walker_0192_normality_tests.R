@@ -31,6 +31,12 @@ qqnorm(nhns1)
 qqline(nhns1, col="red")
 
 
+#normality tests
+nhns1_shapiro <- shapiro.test(nhns1)
+nhns1_ad <- ad.test(nhns1)
+nhns1_cvm <- cvm.test(nhns1)
+nhns1_lillie <- lillie.test(nhns1)
+
 
 
 #heat & salt
@@ -59,6 +65,13 @@ curve(dnorm(x, mean=mean(hs1), sd=sd(hs1)), add=TRUE, col="red", lwd=2)
 
 qqnorm(hs1)
 qqline(hs1, col="red")
+
+#normality tests
+hs1_shapiro <- shapiro.test(hs1)
+hs1_ad <- ad.test(hs1)
+hs1_cvm <- cvm.test(hs1)
+hs1_lillie <- lillie.test(hs1)
+
 
 
 
@@ -92,6 +105,14 @@ qqnorm(nhs1)
 qqline(nhs1, col="red")
 
 
+nhs1_shapiro <- shapiro.test(nhs1)
+nhs1_ad <- ad.test(nhs1)
+nhs1_cvm <- cvm.test(nhs1)
+nhs1_lillie <- lillie.test(nhs1)
+
+
+
+
 
 #heat & nosalt
 
@@ -121,11 +142,23 @@ qqnorm(hns1)
 qqline(hns1, col="red")
 
 
+hns1_shapiro <- shapiro.test(hns1)
+hns1_ad <- ad.test(hns1)
+hns1_cvm <- cvm.test(hns1)
+hns1_lillie <- lillie.test(hns1)
 
 
 
+test_matrix <- cbind(hs1_shapiro, nhs1_shapiro, hns1_shapiro, nhns1_shapiro, row.names = NULL)
 
+test_df <- tibble(test_matrix)
 
+test_df
+test_df <- data.frame(col = rep(colnames(test_matrix), each = nrow(test_matrix)),
+           row = rep(rownames(test_matrix), ncol(test_matrix)),
+           value= as.vector(test_matrix))
+
+test_matrix
 
 #Normality tests
 
